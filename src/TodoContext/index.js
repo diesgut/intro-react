@@ -3,13 +3,20 @@ import { useLocalStorage } from './useLocalStorage';
 
 const TodoContext = React.createContext();
 
+const defaultTodos = [
+  { text: 'Cortar cebolla', completed: true },
+  { text: 'Tomar el cursso de intro a React', completed: false },
+  { text: 'Llorar con la llorona', completed: true },
+  { text: 'LALALALAA', completed: false },
+];
+
 function TodoProvider(props) {
   const {
-    item: todos,
-    saveItem: saveTodos,
+    item: todos, //colocamos un alias a item
+    saveItem: saveTodos, //colocamos un alias a saveItem
     loading,
     error,
-  } = useLocalStorage('TODOS_V1', []);
+  } = useLocalStorage('TODOS_V1', defaultTodos); //can be [] empty array
   const [searchValue, setSearchValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
